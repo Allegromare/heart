@@ -1,4 +1,6 @@
-<!-- entire content of the file ... -->
+# heart_app/templates/heart_app/homepage.html
+{% extends 'base.html' %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,12 +8,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart App</title>
-    {% load static %}  <!-- Carica il tag static -->
+    {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
-    <h1>Hello World!</h1>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="{% url 'admin' %}">Admin</a></li>
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}
+            <h1>Hello World!</h1>
+        {% endblock %}
+    </main>
+
+    <footer>
+        &copy; {{ year }} Tutti i diritti riservati.
+    </footer>
 </body>
 
 </html>

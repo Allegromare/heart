@@ -1,4 +1,3 @@
-<!-- entire content of the file ... -->
 from django.shortcuts import render
 from . import settings  # Importare impostazioni del progetto
 

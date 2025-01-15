@@ -1,3 +1,6 @@
+<!-- entire content of the file ... -->
 from django.shortcuts import render
+from . import settings  # Importare impostazioni del progetto
 
-# Create your views here.
+def homepage(request):
+    return render(request, 'heart_app/homepage.html')

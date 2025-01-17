@@ -23,6 +23,7 @@ def edit_reading(request, pk):
         reading.min_pressure = request.POST.get('min_pressure')
         reading.max_pressure = request.POST.get('max_pressure')
         reading.heart_rate = request.POST.get('heart_rate')
+        reading.reading_time = request.POST.get('reading_time')
         reading.save()
         return redirect('homepage')
     return render(request, 'heart_app/edit_reading.html', {'reading': reading})

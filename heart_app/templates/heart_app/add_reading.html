@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Add Heart Reading</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="min_pressure">Min Pressure:</label><br>
+        <input type="number" id="min_pressure" name="min_pressure"><br>
+        <label for="max_pressure">Max Pressure:</label><br>
+        <input type="number" id="max_pressure" name="max_pressure"><br>
+        <label for="heart_rate">Heart Rate:</label><br>
+        <input type="number" id="heart_rate" name="heart_rate"><br><br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}

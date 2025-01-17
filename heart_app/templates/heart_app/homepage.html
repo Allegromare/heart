@@ -1,36 +1,7 @@
-# heart_app/templates/heart_app/homepage.html
 {% extends 'base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart App</title>
-    {% load static %}
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'admin' %}">Admin</a></li>
-                <li><a href="{% url 'homepage' %}">Home</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        {% block content %}
-            <h1>Hello World!</h1>
-        {% endblock %}
-    </main>
-
-    <footer>
-        &copy; {{ year }} Tutti i diritti riservati.
-    </footer>
-</body>
-
-</html>
+{% block content %}
+<h1>Welcome to the Heart App!</h1>
+<p>This is the homepage of the Heart App.</p>
+{% endblock %}

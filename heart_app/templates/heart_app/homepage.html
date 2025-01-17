@@ -1,7 +1,20 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-<h1>Welcome to the Heart App!</h1>
-<p>This is the homepage of the Heart App.</p>
+    <h1>Welcome to the Heart App!</h1>
+    <p>This is the homepage of the Heart App.</p>
+
+    <h2>Heart Readings</h2>
+    <ul>
+        {% for reading in readings %}
+            <li>
+                <strong>Time:</strong> {{ reading.reading_time }}<br>
+                <strong>Min Pressure:</strong> {{ reading.min_pressure }}<br>
+                <strong>Max Pressure:</strong> {{ reading.max_pressure }}<br>
+                <strong>Heart Rate:</strong> {{ reading.heart_rate }}
+            </li>
+        {% empty %}
+            <li>No heart readings available.</li>
+        {% endfor %}
+    </ul>
 {% endblock %}

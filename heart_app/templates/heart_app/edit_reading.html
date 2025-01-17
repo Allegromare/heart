@@ -12,6 +12,10 @@
         <input type="number" id="heart_rate" name="heart_rate" value="{{ reading.heart_rate }}"><br>
         <label for="reading_time">Reading Time:</label><br>
         <input type="datetime-local" id="reading_time" name="reading_time" value="{{ reading.reading_time|date:'Y-m-d\TH:i' }}"><br><br>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Edit">
+        <button type="button" onclick="document.getElementById('delete-form').submit()">Delete</button>
+    </form>
+    <form id="delete-form" method="post" action="{% url 'delete_reading' pk=reading.pk %}">
+        {% csrf_token %}
     </form>
 {% endblock %}

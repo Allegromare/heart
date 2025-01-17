@@ -27,3 +27,8 @@ def edit_reading(request, pk):
         reading.save()
         return redirect('homepage')
     return render(request, 'heart_app/edit_reading.html', {'reading': reading})
+
+def delete_reading(request, pk):
+    reading = HeartReading.objects.get(pk=pk)
+    reading.delete()
+    return redirect('homepage')

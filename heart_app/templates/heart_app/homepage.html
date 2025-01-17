@@ -12,6 +12,7 @@
                 <strong>Min Pressure:</strong> {{ reading.min_pressure }}<br>
                 <strong>Max Pressure:</strong> {{ reading.max_pressure }}<br>
                 <strong>Heart Rate:</strong> {{ reading.heart_rate }}
+                <a href="{% url 'edit_reading' pk=reading.pk %}">Edit</a>
             </li>
         {% empty %}
             <li>No heart readings available.</li>

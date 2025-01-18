@@ -16,7 +16,7 @@ def add_reading(request):
         max_pressure = request.POST.get('max_pressure')
         heart_rate = request.POST.get('heart_rate')
 
-        if not all(30 < int(x) < 200 for x in [min_pressure, max_pressure, heart_rate]):
+        if not all(x and 30 < int(x) < 200 for x in [min_pressure, max_pressure, heart_rate]):
             messages.error(request, 'I valori di pressione e battito cardiaco devono essere compresi tra 30 e 200.')
             return render(request, 'heart_app/add_reading.html')
 
@@ -32,7 +32,7 @@ def edit_reading(request, pk):
         reading.heart_rate = request.POST.get('heart_rate')
         reading.reading_time = request.POST.get('reading_time')
 
-        if not all(30 < int(x) < 200 for x in [reading.min_pressure, reading.max_pressure, reading.heart_rate]):
+        if not all(x and 30 < int(x) < 200 for x in [reading.min_pressure, reading.max_pressure, reading.heart_rate]):
             messages.error(request, 'I valori di pressione e battito cardiaco devono essere compresi tra 30 e 200.')
             return render(request, 'heart_app/edit_reading.html', {'reading': reading})
 

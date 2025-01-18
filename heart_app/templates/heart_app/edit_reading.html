@@ -19,11 +19,34 @@
 <form id="delete-form" method="post" action="{% url 'delete_reading' pk=reading.pk %}">
     {% csrf_token %}
 </form>
-{% if messages %}
-{% for message in messages %}
-<div class="alert" role="alert">
-    {{ message }}
-</div>
-{% endfor %}
-{% endif %}
+    {% if messages %}
+    myFunction()
+    {% endif %}
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert" role="alert">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <!-- Toast -->
+    <div id="snackbar">Some text some message..</div>
+
+    <!-- Use a button to open the toast -->
+    <button onclick="myFunction()">Show Toast</button>
+
+    <script>
+        function myFunction() {
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar");
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
 {% endblock %}

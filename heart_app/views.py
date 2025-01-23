@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import HeartReading
 import datetime
 from django.utils import timezone
+from django.contrib import messages
 
 def homepage(request):
     readings = HeartReading.objects.all().order_by('reading_date', 'reading_time')
@@ -10,9 +11,10 @@ def homepage(request):
 def about(request):
     return render(request, 'heart_app/about.html')
 
-from django.contrib import messages
-
 def add_reading(request):
+    now = timezone.localtime(timezone.now())
+    context = {'default_date': now.date(), 'default_time': now.strftime('%H:%M')}
+
     if request.method == 'POST':
         min_pressure = request.POST.get('min_pressure')
         max_pressure = request.POST.get('max_pressure')
@@ -22,15 +24,22 @@ def add_reading(request):
 
         if not all(x and 25 < int(x) < 250 for x in [min_pressure, max_pressure, heart_rate]):
             messages.error(request, 'I valori di pressione e battito cardiaco devono essere compresi tra 25 e 250.')
-            now = timezone.localtime(timezone.now())
-            context = {'default_date': now.date(), 'default_time': now.strftime('%H:%M')}
             return render(request, 'heart_app/add_reading.html', context)
 
-        HeartReading.objects.create(min_pressure=min_pressure, max_pressure=max_pressure, heart_rate=heart_rate, reading_date=reading_date, reading_time=reading_time)
-        messages.success(request, 'Lettura aggiunta con successo.')
-        return redirect('homepage')
-    now = timezone.localtime(timezone.now())
-    context = {'default_date': now.date(), 'default_time': now.strftime('%H:%M')}
+        try:
+            HeartReading.objects.create(
+                min_pressure=min_pressure,
+                max_pressure=max_pressure,
+                heart_rate=heart_rate,
+                reading_date=reading_date,
+                reading_time=reading_time
+            )
+            messages.success(request, 'Lettura aggiunta con successo.')
+            return redirect('homepage')
+        except ValueError as e:
+            messages.error(request, f'Errore durante l\'aggiunta della lettura: {e}')
+            return render(request, 'heart_app/add_reading.html', context)
+
     return render(request, 'heart_app/add_reading.html', context)
 
 def edit_reading(request, pk):

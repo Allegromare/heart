@@ -4,7 +4,7 @@ import datetime
 from django.utils import timezone
 
 def homepage(request):
-    readings = HeartReading.objects.all()
+    readings = HeartReading.objects.all().order_by('reading_date', 'reading_time')
     return render(request, 'heart_app/homepage.html', {'readings': readings})
 
 def about(request):

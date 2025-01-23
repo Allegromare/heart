@@ -10,9 +10,13 @@
     <input type="number" id="max_pressure" name="max_pressure" value="{{ reading.max_pressure }}"><br>
     <label for="heart_rate">Heart Rate:</label><br>
     <input type="number" id="heart_rate" name="heart_rate" value="{{ reading.heart_rate }}"><br>
+
+    <label for="reading_date">Reading Date:</label><br>
+    <input type="date" id="reading_date" name="reading_date" value="{{ reading.reading_date|date:'Y-m-d' }}"><br>
+
     <label for="reading_time">Reading Time:</label><br>
-    <input type="datetime-local" id="reading_time" name="reading_time"
-        value="{{ reading.reading_time|date:'Y-m-d\TH:i' }}"><br><br>
+    <input type="time" id="reading_time" name="reading_time" value="{{ reading.reading_time|date:'H:i' }}"><br><br>
+
     <input type="submit" value="Edit">
     <button type="button" onclick="document.getElementById('delete-form').submit()">Delete</button>
 </form>

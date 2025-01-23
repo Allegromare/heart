@@ -9,6 +9,7 @@
     {% for reading in readings %}
 
     <article>
+        <li><strong>Date:</strong> {{ reading.reading_date }}</li>
         <li><strong>Time:</strong> {{ reading.reading_time }}</li>
         <li><strong>Min Pressure:</strong> {{ reading.min_pressure }}</li>
         <li><strong>Max Pressure:</strong> {{ reading.max_pressure }}</li>

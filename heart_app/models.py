@@ -1,6 +1,6 @@
 from django.db import models
 
-class HeartRateReading(models.Model):
+class HeartReading(models.Model):
     min_pressure = models.IntegerField()
     max_pressure = models.IntegerField()
     heart_rate = models.IntegerField()

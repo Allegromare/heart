@@ -5,18 +5,58 @@
 <form method="post">
     {% csrf_token %}
     <label for="min_pressure">Min Pressure:</label><br>
-    <input type="number" id="min_pressure" name="min_pressure"><br>
+    <input type="number" id="min_pressure" name="min_pressure" required min="25" max="250"><br>
     <label for="max_pressure">Max Pressure:</label><br>
-    <input type="number" id="max_pressure" name="max_pressure"><br>
+    <input type="number" id="max_pressure" name="max_pressure" required min="25" max="250"><br>
     <label for="heart_rate">Heart Rate:</label><br>
-    <input type="number" id="heart_rate" name="heart_rate"><br>
-    <input type="submit" value="Submit">
+    <input type="number" id="heart_rate" name="heart_rate" required min="25" max="250"><br>
+    <input type="submit" value="Add">
+
+    <!-- Toast -->
+    <div id="toast">Some text some message..</div>
+
+    <!--
     {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-danger" role="alert">
-                {{ message }}
-            </div>
-        {% endfor %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+        <div class="alert" role="alert">
+        {{ message }}
+        </div>
+        {% endif %}
+        {% if message.tags == 'success' %}
+        <div class="alert" role="alert">
+        {{ message }}
+        </div>
+        {% endif %}
+
+    {% endfor %}
     {% endif %}
+    -->
+
+
+    {% if messages %}
+    {% for message in messages %}
+    {% if message.tags == 'success' %}
+    <script>
+        showToast("{{ message }}");
+    </script>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+
+    <script>
+        function showToast(message) {
+            // Get the toast DIV
+            var x = document.getElementById("toast");
+
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
+
 </form>
+
 {% endblock %}

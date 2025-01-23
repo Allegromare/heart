@@ -1,22 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Welcome to the Heart App!</h1>
-    <p>This is the homepage of the Heart App.</p>
+<h2>Heart Readings</h2>
 
-    <h2>Heart Readings</h2>
-    <ul>
-        {% for reading in readings %}
-            <li>
-                <strong>Time:</strong> {{ reading.reading_time }}<br>
-                <strong>Min Pressure:</strong> {{ reading.min_pressure }}<br>
-                <strong>Max Pressure:</strong> {{ reading.max_pressure }}<br>
-                <strong>Heart Rate:</strong> {{ reading.heart_rate }}
-                <a href="{% url 'edit_reading' pk=reading.pk %}">Edit</a>
-            </li>
-        {% empty %}
-            <li>No heart readings available.</li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'add_reading' %}">Add Reading</a>
+<a href="{% url 'add_reading' %}">Add</a>
+
+<ul>
+    {% for reading in readings %}
+
+    <article>
+        <li><strong>Time:</strong> {{ reading.reading_time }}</li>
+        <li><strong>Min Pressure:</strong> {{ reading.min_pressure }}</li>
+        <li><strong>Max Pressure:</strong> {{ reading.max_pressure }}</li>
+        <li><strong>Heart Rate:</strong> {{ reading.heart_rate }}</li>
+        <li><a href="{% url 'edit_reading' pk=reading.pk %}">Edit</a></li>
+    </article>
+
+    {% empty %}
+    <li class="alert">No heart readings available.</li>
+    {% endfor %}
+</ul>
 {% endblock %}

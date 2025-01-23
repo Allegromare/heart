@@ -12,10 +12,10 @@
     <input type="number" id="heart_rate" name="heart_rate" required min="25" max="250"><br>
 
     <label for="reading_date">Reading Date:</label><br>
-    <input type="date" id="reading_date" name="reading_date" required><br>
+    <input type="date" id="reading_date" name="reading_date" value="{{ default_date|date:'Y-m-d' }}" required><br>
 
     <label for="reading_time">Reading Time:</label><br>
-    <input type="time" id="reading_time" name="reading_time" required><br>
+    <input type="time" id="reading_time" name="reading_time" value="{{ default_time }}" required><br>
 
     <input type="submit" value="Add">
 

@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import HeartReading
+import datetime
 
 def homepage(request):
     readings = HeartReading.objects.all()
@@ -20,12 +21,14 @@ def add_reading(request):
 
         if not all(x and 25 < int(x) < 250 for x in [min_pressure, max_pressure, heart_rate]):
             messages.error(request, 'I valori di pressione e battito cardiaco devono essere compresi tra 25 e 250.')
-            return render(request, 'heart_app/add_reading.html')
+            context = {'default_date': datetime.date.today(), 'default_time': datetime.datetime.now().strftime('%H:%M')}
+            return render(request, 'heart_app/add_reading.html', context)
 
         HeartReading.objects.create(min_pressure=min_pressure, max_pressure=max_pressure, heart_rate=heart_rate, reading_date=reading_date, reading_time=reading_time)
         messages.success(request, 'Lettura aggiunta con successo.')
         return redirect('homepage')
-    return render(request, 'heart_app/add_reading.html')
+    context = {'default_date': datetime.date.today(), 'default_time': datetime.datetime.now().strftime('%H:%M')}
+    return render(request, 'heart_app/add_reading.html', context)
 
 def edit_reading(request, pk):
     reading = HeartReading.objects.get(pk=pk)

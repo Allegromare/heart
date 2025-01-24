@@ -20,50 +20,26 @@
     <input type="submit" value="Add">
 
     <!-- Toast -->
-    <div id="toast">Some text some message..</div>
-
-    <!--
-    {% if messages %}
-    {% for message in messages %}
-        {% if message.tags == 'error' %}
-        <div class="alert" role="alert">
-        {{ message }}
-        </div>
-        {% endif %}
-        {% if message.tags == 'success' %}
-        <div class="alert" role="alert">
-        {{ message }}
-        </div>
-        {% endif %}
-
-    {% endfor %}
-    {% endif %}
-    -->
-
+    <div id="toast"></div>
 
     {% if messages %}
-    {% for message in messages %}
-    {% if message.tags == 'success' %}
-    <script>
-        showToast("{{ message }}");
-    </script>
-    {% endif %}
-    {% endfor %}
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <script>
+                    showToast("{{ message }}");
+                </script>
+            {% endif %}
+        {% endfor %}
     {% endif %}
 
     <script>
         function showToast(message) {
-            // Get the toast DIV
             var x = document.getElementById("toast");
-
-            // Add the "show" class to DIV
+            x.innerHTML = message;
             x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         }
     </script>
-
 </form>
 
 {% endblock %}

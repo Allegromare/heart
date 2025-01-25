@@ -36,9 +36,9 @@ def add_reading(request):
             return redirect('homepage')
         except ValueError as e:
             messages.error(request, f'Errore durante l\'aggiunta della lettura: {e}')
-            return render(request, 'heart_app/add_reading.html', "default_date": now)
+            return render(request, 'heart_app/add_reading.html', {'default_date': now})
 
-    return render(request, 'heart_app/add_reading.html', "default_date": now)
+    return render(request, 'heart_app/add_reading.html', {'default_date': now})
 
 def edit_reading(request, pk):
     reading = HeartReading.objects.get(pk=pk)

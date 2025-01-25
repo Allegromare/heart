@@ -12,7 +12,7 @@
     <input type="number" id="heart_rate" name="heart_rate" value="{{ reading.heart_rate }}"><br>
 
     <label for="reading_date">Reading Date:</label><br>
-    <input type="datetime" id="reading_date" name="reading_date" value="{{ reading.reading_date }}"><br>
+    <input type="datetime-local" id="reading_date" name="reading_date" value="{{ reading.reading_date|date:'Y-m-d H:i' }}"><br>
 
     <input type="submit" value="Save">
     <button type="button" onclick="document.getElementById('delete-form').submit()">Delete</button>

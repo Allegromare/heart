@@ -12,45 +12,21 @@
     <input type="number" id="heart_rate" name="heart_rate" value="{{ reading.heart_rate }}"><br>
 
     <label for="reading_date">Reading Date:</label><br>
-    <input type="date" id="reading_date" name="reading_date" value="{{ reading.reading_date|date:'Y-m-d' }}"><br>
+    <input type="datetime" id="reading_date" name="reading_date" value="{{ reading.reading_date }}"><br>
 
-    <label for="reading_time">Reading Time:</label><br>
-    <input type="time" id="reading_time" name="reading_time" value="{{ reading.reading_time|date:'H:i' }}"><br><br>
-
-    <input type="submit" value="Edit">
+    <input type="submit" value="Save">
     <button type="button" onclick="document.getElementById('delete-form').submit()">Delete</button>
 </form>
 <form id="delete-form" method="post" action="{% url 'delete_reading' pk=reading.pk %}">
     {% csrf_token %}
 </form>
-    {% if messages %}
-    myFunction()
-    {% endif %}
 
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert" role="alert">
-        {{ message }}
-    </div>
-    {% endfor %}
-    {% endif %}
+{% if messages %}
+{% for message in messages %}
+<div class="alert" role="alert">
+    {{ message }}
+</div>
+{% endfor %}
+{% endif %}
 
-    <!-- Toast -->
-    <div id="snackbar">Some text some message..</div>
-
-    <!-- Use a button to open the toast -->
-    <button onclick="myFunction()">Show Toast</button>
-
-    <script>
-        function myFunction() {
-            // Get the snackbar DIV
-            var x = document.getElementById("snackbar");
-
-            // Add the "show" class to DIV
-            x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
-        }
-    </script>
 {% endblock %}

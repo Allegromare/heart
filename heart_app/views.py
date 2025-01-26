@@ -22,10 +22,15 @@ def add_reading(request):
         min_pressure = request.POST.get('min_pressure')
         max_pressure = request.POST.get('max_pressure')
         heart_rate = request.POST.get('heart_rate')
-        reading_date = request.POST.get('reading_date')
+        reading_date_str = request.POST.get('reading_date')
         
         print("NOW ", now)
-        print("READING DATE", reading_date)
+        print("READING DATE", reading_date_str)
+        try:
+            reading_date = datetime.datetime.fromisoformat(reading_date_str)
+        except ValueError:
+            messages.error(request, 'Invalid date or time format.')
+            return render(request, 'heart_app/add_reading.html', {'default_date': now})
 
         if not all(x and 25 < int(x) < 250 for x in [min_pressure, max_pressure, heart_rate]):
             messages.error(request, 'I valori di pressione e battito cardiaco devono essere compresi tra 25 e 250.')
@@ -36,6 +41,7 @@ def add_reading(request):
                 min_pressure=min_pressure,
                 max_pressure=max_pressure,
                 heart_rate=heart_rate,
+                reading_date=reading_date
             )
             messages.success(request, 'Lettura aggiunta con successo.')
             return redirect('homepage')

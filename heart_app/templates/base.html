@@ -6,22 +6,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heart App</title>
-    <link rel="stylesheet" href="<path-a-bootstrap-italia>/dist/css/bootstrap-italia.min.css" />
-    <!--
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.cyan.min.css">
+
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    -->
+
 </head>
 
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="{% url 'about' %}">About</a></li>
-                <li><a href="{% url 'homepage' %}">Home</a></li>
-            </ul>
-        </nav>
-    </header>
+<body class="container">
+    <nav>
+        <ul>
+            <li><a href="{% url 'about' %}">About</a></li>
+            <li><a href="{% url 'homepage' %}">Home</a></li>
+        </ul>
+    </nav>
+
 
     <main>
         {% block content %}{% endblock %}

@@ -6,8 +6,6 @@ from django.contrib import messages
 
 def homepage(request):
     readings = HeartReading.objects.all().order_by('reading_date')
-    if len(readings) > 1:
-        print("HOMEPAGE READINGS[1]:", readings[1].reading_date)
     return render(request, 'heart_app/homepage.html', {'readings': readings})
 
 def about(request):
@@ -54,10 +52,9 @@ def edit_reading(request, pk):
         reading.min_pressure = request.POST.get('min_pressure')
         reading.max_pressure = request.POST.get('max_pressure')
         reading.heart_rate = request.POST.get('heart_rate')
-        reading_date_str = request.POST.get('reading_date')
 
         try:
-            reading.reading_date = datetime.datetime.fromisoformat(reading_date_str)
+            reading.reading_date = datetime.datetime.fromisoformat(request.POST.get('reading_date'))
         except ValueError:
              messages.error(request, 'Invalid date or time format.')
              return render(request, 'heart_app/edit_reading.html', {'reading': reading})

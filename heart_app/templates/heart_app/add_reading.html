@@ -10,36 +10,18 @@
     <input type="number" id="max_pressure" name="max_pressure" required min="25" max="250"><br>
     <label for="heart_rate">Heart Rate:</label><br>
     <input type="number" id="heart_rate" name="heart_rate" required min="25" max="250"><br>
-
     <label for="reading_date">Reading Date:</label><br>
-    <input type="date" id="reading_date" name="reading_date" value="{{ default_date|date:'Y-m-d' }}" required><br>
-
-    <label for="reading_time">Reading Time:</label><br>
-    <input type="time" id="reading_time" name="reading_time" value="{{ default_time }}" required><br>
-
+    <input type="datetime-local" id="reading_date" name="reading_date" value="{{ default_date|date:'Y-m-d H:i' }}"
+        required><br>
     <input type="submit" value="Add">
 
-    <!-- Toast -->
-    <div id="toast"></div>
-
     {% if messages %}
-        {% for message in messages %}
-            {% if message.tags == 'success' %}
-                <script>
-                    showToast("{{ message }}");
-                </script>
-            {% endif %}
-        {% endfor %}
+    {% for message in messages %}
+    {% if message.tags != 'success' %}
+    {{ message }}
     {% endif %}
-
-    <script>
-        function showToast(message) {
-            var x = document.getElementById("toast");
-            x.innerHTML = message;
-            x.className = "show";
-            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
-        }
-    </script>
+    {% endfor %}
+    {% endif %}
 </form>
 
 {% endblock %}
